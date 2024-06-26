@@ -5,59 +5,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/8c5fb25a16.js" crossorigin="anonymous"></script>
-    {% load static %} <!-- Cargar etiquetas estáticas -->
+    {% load static %}
     <title>{% block title %}Título por defecto{% endblock %}</title>
-
-
 </head>
 <body>
     <header id="header" class="bg-violet-200 px-6 shadow fixed w-full top-0 z-50 transition-bg">
         <div class="max-w-6xl mx-auto flex justify-between h-16 items-center">
-            <!---boton de despliegue de menu-->
+            <!-- Botón de despliegue de menú -->
             <button id="menu-toggle" class="p-1 -ml-1 hover:bg-indigo-300 hover:text-white rounded transition-colors focus:ring-2 focus:ring-violet-300 lg:hidden">
                 <span><i class="fa-solid fa-bars"></i></span>
             </button>
-            <!---fin-boton de despliegue de menu-->
-    
-            <!---ESCRITORIO-->
+
+            <!-- Escritorio -->
             <div class="flex items-center -mr-4">
-                <!---logo-->
+                <!-- Logo -->
                 <a class="duration-300 hover:rotate-6" href="#"><img class="h-8 w-8" src="{% static 'front/img/fav.svg' %}" alt="logo"></a>
-                <!---fin_logo-->
-    
+                <!-- Fin Logo -->
+
                 <div class="hidden md:flex space-x-8 ml-4">
                     <a href="{% url 'index' %}" class="px-3 py-2 text-slate-600 transition-colors uppercase">inicio</a>
                     <a href="{% url 'productos' %}" class="px-3 py-2 text-slate-600 transition-colors uppercase hover:text-fuchsia-500">productos</a>
                     <a href="{% url 'categorias' %}" class="px-3 py-2 text-slate-600 transition-colors uppercase hover:text-fuchsia-500">categorias</a>
                 </div>
             </div>
-            <!---FIN-ESCRITORIO-->
-    
-            <!---agrupaciones-->
+            <!-- Fin Escritorio -->
+
+            <!-- Agrupaciones -->
             <div class="flex items-center space-x-4">
                 <a href="{% url 'registrar' %}" class="bg-lime-500 text-white font-bold py-2 px-4 rounded shadow-lg transition duration-300 ease-in-out hover:bg-violet-500">registrar</a>
                 <a href="{% url 'iniciar' %}" class="bg-fuchsia-500 text-white font-bold py-2 px-4 rounded shadow-lg transition duration-300 ease-in-out hover:bg-violet-500">iniciar</a>
             </div>
-            <!---FIN-agrupaciones-->
+            <!-- Fin Agrupaciones -->
         </div>
         
-        <!---link de navegacion MOVIL-->
+        <!-- Link de navegación móvil -->
         <div id="mobile-menu" class="hidden md:hidden">
             <a href="{% url 'index' %}" class="block px-4 py-2 text-slate-600 transition-colors uppercase">inicio</a>
             <a href="{% url 'productos' %}" class="block px-4 py-2 text-slate-600 transition-colors uppercase hover:text-fuchsia-500">productos</a>
             <a href="{% url 'categorias' %}" class="block px-4 py-2 text-slate-600 transition-colors uppercase hover:text-fuchsia-500">categoria</a>
         </div>
-        <!---fin--navegacion--->
+        <!-- Fin Navegación móvil -->
     </header>
-    
-    
-    
-    
-    <!-- Contenido del cuerpo -->
-    {% block content %}
-    Contenido por defecto
-    {% endblock %}
 
+    <main class="mt-20 min-h-screen px-4 sm:px-6 lg:px-8">
+        <!-- Contenido del cuerpo -->
+        {% block content %}
+        {% endblock %}
+    </main>
+    
     <script src="{% static 'front/js/toogle.js' %}"></script>
 </body>
 </html>

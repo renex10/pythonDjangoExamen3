@@ -1,13 +1,13 @@
-# webapp/urls.py
 from django.urls import path
-from . import views  # Importa las vistas desde el módulo actual (webapp)
+from . import views
 
 urlpatterns = [
-    path("", views.index, name="index"),  # URL para la página de inicio
-    path("productos/", views.productos, name="productos"),  # URL para la página de productos
-    path("categorias/", views.categorias, name="categorias"),  # URL para la página de categorías
-    path("registrar/", views.registrar, name="registrar"),  # URL para la página de registro
-    path("iniciar/", views.iniciar, name="iniciar"),  # URL para la página de iniciar sesión
-    # Otros paths según tus necesidades
+    path("", views.index, name="index"),
+    path("productos/", views.registrar_productos, name="productos"),
+    path("categorias/", views.registrar_categorias, name="categorias"),
+    path("registrar/", views.registrar, name="registrar"),
+    path("iniciar/", views.iniciar, name="iniciar"),
+    path('eliminar_categoria/<int:id_categoria>/', views.eliminar_categoria, name='eliminar_categoria'),
 ]
+
 
