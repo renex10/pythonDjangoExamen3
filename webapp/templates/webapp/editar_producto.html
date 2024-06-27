@@ -1,0 +1,36 @@
+{% extends 'webapp/base.html' %}
+{% load static %}
+
+{% block title %}
+    Mi Página - Editar Producto
+{% endblock %}
+
+{% block content %}
+<div class="flex items-center justify-center min-h-screen bg-gray-100">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+        <h2 class="text-2xl font-bold mb-6 text-center">Editar Producto</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-4">
+                <label for="{{ form.nombre.id_for_label }}" class="block text-sm font-medium text-gray-700">Nombre</label>
+                {{ form.nombre }}
+            </div>
+            <div class="mb-4">
+                <label for="{{ form.precio.id_for_label }}" class="block text-sm font-medium text-gray-700">Precio</label>
+                {{ form.precio }}
+            </div>
+            <div class="mb-4">
+                <label for="{{ form.stock.id_for_label }}" class="block text-sm font-medium text-gray-700">Stock</label>
+                {{ form.stock }}
+            </div>
+            <div class="mb-4">
+                <label for="{{ form.categoria.id_for_label }}" class="block text-sm font-medium text-gray-700">Categoría</label>
+                {{ form.categoria }}
+            </div>
+            <button type="submit" class="w-full bg-orange-500 text-white font-bold py-2 px-4 rounded-md hover:bg-green-500 hover:shadow-lg transition duration-300 ease-in-out cursor-pointer">Actualizar</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+
