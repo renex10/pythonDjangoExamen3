@@ -12,5 +12,4 @@ urlpatterns = [
     path('editar_producto/<int:id_producto>/', views.editar_producto, name='editar_producto'),
     path('registrar/', views.registrar_usuario, name='registrar'),
     path('iniciar/', views.iniciar_sesion, name='iniciar_sesion'),
-    path('cerrar/', views.cerrar_sesion, name='cerrar_sesion'),  # Añade una URL para cerrar sesión si no existe
-]
+    path('cerrar/', views.cerrar_sesion, name='cerrar_sesion'), 

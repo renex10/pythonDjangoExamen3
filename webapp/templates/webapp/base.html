@@ -75,22 +75,31 @@
         {% endblock %}
     </main>
 
-    <footer class="text-gray-600 body-font">
-        <div class="container px-5 py-8 mx-auto flex items-center justify-between">
-            <div class="text-sm text-gray-500">Desarrollado por:
-                <span class="text-gray-900">Rene Riquelme</span>
-            </div>
-            <div class="text-sm text-gray-500">Correo:
-                <a href="mailto:correo@institucional.com" class="text-gray-900">RENE.RIQUELME@alumno.santiagocft.cl</a>
-            </div>
-            <div class="text-sm text-gray-500">Fecha de entrega:
-                <span class="text-gray-900">29 de junio de 2024</span>
-            </div>
-        </div>
-    </footer>
+
     
     <script src="{% static 'front/js/toogle.js' %}"></script>
     {% block extrajs %}
     {% endblock %}
+    <footer class="text-gray-600 body-font bg-gray-100 shadow-lg py-6 mt-8">
+        <div class="container px-5 py-8 mx-auto flex flex-col sm:flex-row items-center justify-between">
+            <div class="text-center sm:text-left">
+                <div class="text-sm text-gray-500">Desarrollado por:
+                    <span class="text-gray-900 font-bold text-xl sm:text-2xl">Rene Riquelme</span>
+                </div>
+            </div>
+            <div class="text-center sm:text-left mt-4 sm:mt-0">
+                <div class="text-sm text-gray-500">Correo:
+                    <a href="mailto:correo@institucional.com" class="text-gray-900 font-bold text-xl sm:text-2xl">RENE.RIQUELME@alumno.santiagocft.cl</a>
+                </div>
+            </div>
+            <div class="text-center sm:text-left mt-4 sm:mt-0">
+                <div class="text-sm text-gray-500">Fecha de entrega:
+                    <span class="text-gray-900 font-bold text-xl sm:text-2xl">28 de junio de 2024</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    
 </body>
 </html>

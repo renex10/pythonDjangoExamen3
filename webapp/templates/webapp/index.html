@@ -9,22 +9,38 @@
 <section class="text-gray-600 body-font">
     <div class="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
         <div class="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
-            <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">Before they sold out
-                <br class="hidden lg:inline-block">readymade gluten
+            <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">Proyecto de Desarrollo Institucional
+                <br class="hidden lg:inline-block">Centro de formacion tecnica Santiago cft
             </h1>
-            <p class="mb-8 leading-relaxed">Copper mug try-hard pitchfork pour-over freegan heirloom neutra air
-                plant
-                cold-pressed tacos poke beard tote bag. Heirloom echo park mlkshk tote bag selvage hot chicken
-                authentic
-                tumeric truffaut hexagon try-hard chambray.</p>
+            <p class="mb-8 leading-relaxed">El Centro de Formación Técnica Estatal de la Región Metropolitana de Santiago es creado por la Ley N°20.910 de 2016, y enfoca su labor en base a los ejes propuestos por el gobierno, rigiéndose por 
+                sus Estatutos aprobados por DFL N°18 de 2017, del Ministerio de Educación.</p>
         </div>
         <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
             <img class="object-cover object-center rounded" alt="hero" src="{% static 'front/img/fav.svg' %}">
         </div>
     </div>
 </section>
+<div class="bg-white overflow-hidden relative mt-20 flex flex-col lg:flex-row">
+    <div class="w-full lg:w-1/2 py-12 px-4 sm:px-6 lg:py-16 lg:px-8 z-20 text-start">
+        <h2 class="text-3xl font-extrabold text-black dark:text-white sm:text-4xl">
+            <span class="block text-gray-600">
+                Breve descripción
+            </span>
+            <span class="block text-indigo-500">
+                ¿Para qué se construyó o qué hace?
+            </span>
+        </h2>
+        <p class="text-xl mt-4 text-gray-400">
+            La página incluye funcionalidades como el registro e inicio de sesión de usuarios, la adición y visualización de productos y categorías, y una interfaz responsiva que se adapta a diferentes dispositivos. Además, se busca garantizar una experiencia de usuario agradable y 
+            eficiente mediante el uso de animaciones y mensajes de confirmación automáticos.
+        </p>
+    </div>
+    <div class="w-full lg:w-1/2 relative">
+        <img src="{% static 'front/img/fav.svg' %}" class="hidden lg:block absolute top-0 right-0 h-full max-w-full lg:max-w-1/2"/>
+    </div>
+</div>
 
-<section class="text-gray-600 body-font info">
+<section class="text-gray-600 body-font info mt-20">
     <div class="container px-5 py-24 mx-auto">
         <div class="flex flex-wrap -m-4 justify-center">
             <div class="p-4 lg:w-1/4 sm:w-1/2 w-full">
@@ -42,4 +58,9 @@
         </div>
     </div>
 </section>
+
+
+
+
+
 {% endblock %}

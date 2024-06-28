@@ -24,18 +24,17 @@ def registrar_productos(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Producto guardado exitosamente.')
-            return redirect('productos')  # Redirige a la misma página de productos
+            return redirect('productos') 
         else:
             messages.error(request, 'Ha ocurrido un error al guardar el producto.')
     else:
         form = ProductoForm()
     
-    categorias = Categoria.objects.all()  # Asegúrate de tener las categorías disponibles para el formulario
-    
+    categorias = Categoria.objects.all()  
     return render(request, 'webapp/productos.html', {
         'form': form,
         'categorias': categorias,
-        'productos': Producto.objects.all()  # Esto es para mostrar los productos registrados
+        'productos': Producto.objects.all() 
     })
 
 def registrar_categorias(request):
@@ -46,7 +45,7 @@ def registrar_categorias(request):
             messages.success(request, 'Categoría agregada con éxito.')
             return redirect('categorias')
         else:
-            # Recopila los mensajes de error del formulario
+        
             error_message = "Error al agregar categoría: "
             for field, errors in form.errors.items():
                 for error in errors:
@@ -79,7 +78,7 @@ def editar_categoria(request, id_categoria):
             messages.success(request, 'Categoría actualizada correctamente.')
             return redirect('categorias')
         else:
-            # Añadir un mensaje de error más detallado
+         
             error_message = "Error al actualizar categoría: "
             for field in form:
                 for error in field.errors:
