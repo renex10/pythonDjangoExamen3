@@ -1,12 +1,22 @@
-from django.shortcuts import render, redirect
-from .models import Producto, Categoria
-from .categoria_form import CategoriaForm  # Importar el formulario correctamente
-from django.contrib import messages
-from .productosForm import ProductoForm  # Importa el formulario actualizado
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
+from .models import Producto, Categoria
+from .categoria_form import CategoriaForm
+from .productosForm import ProductoForm
+from .registro_usuario import RegistroUsuarioForm
+from .login_usuario import LoginForm
 
 def index(request):
-    return render(request, 'webapp/index.html')
+    num_categorias = Categoria.objects.count()
+    num_productos = Producto.objects.count()
+    
+    context = {
+        'num_categorias': num_categorias,
+        'num_productos': num_productos
+    }
+    return render(request, 'webapp/index.html', context)
 
 def registrar_productos(request):
     if request.method == 'POST':
@@ -27,6 +37,7 @@ def registrar_productos(request):
         'categorias': categorias,
         'productos': Producto.objects.all()  # Esto es para mostrar los productos registrados
     })
+
 def registrar_categorias(request):
     if request.method == 'POST':
         form = CategoriaForm(request.POST)
@@ -35,7 +46,12 @@ def registrar_categorias(request):
             messages.success(request, 'Categoría agregada con éxito.')
             return redirect('categorias')
         else:
-            messages.error(request, 'Error al agregar categoría.')
+            # Recopila los mensajes de error del formulario
+            error_message = "Error al agregar categoría: "
+            for field, errors in form.errors.items():
+                for error in errors:
+                    error_message += f"{field}: {error}. "
+            messages.error(request, error_message)
     else:
         form = CategoriaForm()
 
@@ -74,13 +90,30 @@ def editar_categoria(request, id_categoria):
     
     return render(request, 'webapp/editar_categoria.html', {'form': form})
 
+def iniciar_sesion(request):
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                messages.success(request, f'Bienvenido, {username}. Has iniciado sesión correctamente.')
+                return redirect('index')
+            else:
+                messages.error(request, 'Nombre de usuario o contraseña incorrectos.')
+        else:
+            messages.error(request, 'Por favor corrige los errores.')
+    else:
+        form = LoginForm()
+    
+    return render(request, 'webapp/iniciar.html', {'form': form})
 
-def registrar(request):
-    return render(request, 'webapp/registrar.html')
-
-def iniciar(request):
-    return render(request, 'webapp/iniciar.html')
-
+def cerrar_sesion(request):
+    logout(request)
+    messages.success(request, 'Has cerrado sesión correctamente.')
+    return redirect('index')
 
 def eliminar_producto(request, id_producto):
     producto = get_object_or_404(Producto, id_producto=id_producto)
@@ -89,7 +122,6 @@ def eliminar_producto(request, id_producto):
     return redirect('productos')
 
 def editar_producto(request, id_producto):
-    # Obtener el producto a editar por su ID, si no existe retornar un 404
     producto = get_object_or_404(Producto, id_producto=id_producto)
     
     if request.method == 'POST':
@@ -97,8 +129,25 @@ def editar_producto(request, id_producto):
         if form.is_valid():
             form.save()
             messages.success(request, 'El producto se ha actualizado correctamente.')
-            return redirect('productos')  # Redirige a la lista de productos después de la edición
+            return redirect('productos')
     else:
         form = ProductoForm(instance=producto)
     
     return render(request, 'webapp/editar_producto.html', {'form': form})
+
+def registrar_usuario(request):
+    if request.method == 'POST':
+        form = RegistroUsuarioForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            messages.success(request, f'Usuario {username} registrado correctamente.')
+            return redirect('registrar')
+        else:
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f'Error en el campo {field}: {error}')
+    else:
+        form = RegistroUsuarioForm()
+    
+    return render(request, 'webapp/registrar.html', {'form': form})

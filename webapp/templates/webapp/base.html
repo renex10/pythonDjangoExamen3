@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +6,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/8c5fb25a16.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'front/css/style.css' %}">
+
+
+    {% block extracss %}
+    {% endblock %}
+
     {% load static %}
     <title>{% block title %}Título por defecto{% endblock %}</title>
 </head>
@@ -19,21 +26,34 @@
             <!-- Escritorio -->
             <div class="flex items-center -mr-4">
                 <!-- Logo -->
-                <a class="duration-300 hover:rotate-6" href="#"><img class="h-8 w-8" src="{% static 'front/img/fav.svg' %}" alt="logo"></a>
+                <a class="duration-300 hover:rotate-6" href="{% url 'index' %}"><img class="h-8 w-8" src="{% static 'front/img/fav.svg' %}" alt="logo"></a>
                 <!-- Fin Logo -->
 
                 <div class="hidden md:flex space-x-8 ml-4">
                     <a href="{% url 'index' %}" class="px-3 py-2 text-slate-600 transition-colors uppercase">inicio</a>
-                    <a href="{% url 'productos' %}" class="px-3 py-2 text-slate-600 transition-colors uppercase hover:text-fuchsia-500">productos</a>
-                    <a href="{% url 'categorias' %}" class="px-3 py-2 text-slate-600 transition-colors uppercase hover:text-fuchsia-500">categorias</a>
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'productos' %}" class="px-3 py-2 text-slate-600 transition-colors uppercase hover:text-fuchsia-500">productos</a>
+                        <a href="{% url 'categorias' %}" class="px-3 py-2 text-slate-600 transition-colors uppercase hover:text-fuchsia-500">categorias</a>
+                    {% endif %}
                 </div>
             </div>
             <!-- Fin Escritorio -->
 
             <!-- Agrupaciones -->
             <div class="flex items-center space-x-4">
-                <a href="{% url 'registrar' %}" class="bg-lime-500 text-white font-bold py-2 px-4 rounded shadow-lg transition duration-300 ease-in-out hover:bg-violet-500">registrar</a>
-                <a href="{% url 'iniciar' %}" class="bg-fuchsia-500 text-white font-bold py-2 px-4 rounded shadow-lg transition duration-300 ease-in-out hover:bg-violet-500">iniciar</a>
+                {% if user.is_authenticated %}
+                    <span class="px-3 py-2 text-slate-600">Hola, {{ user.username }}</span>
+                    <a href="{% url 'cerrar_sesion' %}" class="bg-red-500 text-white font-bold py-2 px-4 rounded shadow-lg transition duration-300 ease-in-out hover:bg-red-700">
+                        <i class="fa-solid fa-sign-out-alt"></i> Logout
+                    </a>
+                {% else %}
+                    <a href="{% url 'registrar' %}" class="bg-lime-500 text-white font-bold py-2 px-4 rounded shadow-lg transition duration-300 ease-in-out hover:bg-violet-500">
+                        <i class="fa-solid fa-user-plus"></i> Registrar
+                    </a>
+                    <a href="{% url 'iniciar_sesion' %}" class="bg-fuchsia-500 text-white font-bold py-2 px-4 rounded shadow-lg transition duration-300 ease-in-out hover:bg-violet-500">
+                        <i class="fa-solid fa-sign-in-alt"></i> Iniciar
+                    </a>
+                {% endif %}
             </div>
             <!-- Fin Agrupaciones -->
         </div>
@@ -41,8 +61,10 @@
         <!-- Link de navegación móvil -->
         <div id="mobile-menu" class="hidden md:hidden">
             <a href="{% url 'index' %}" class="block px-4 py-2 text-slate-600 transition-colors uppercase">inicio</a>
-            <a href="{% url 'productos' %}" class="block px-4 py-2 text-slate-600 transition-colors uppercase hover:text-fuchsia-500">productos</a>
-            <a href="{% url 'categorias' %}" class="block px-4 py-2 text-slate-600 transition-colors uppercase hover:text-fuchsia-500">categoria</a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'productos' %}" class="block px-4 py-2 text-slate-600 transition-colors uppercase hover:text-fuchsia-500">productos</a>
+                <a href="{% url 'categorias' %}" class="block px-4 py-2 text-slate-600 transition-colors uppercase hover:text-fuchsia-500">categorias</a>
+            {% endif %}
         </div>
         <!-- Fin Navegación móvil -->
     </header>
@@ -52,7 +74,23 @@
         {% block content %}
         {% endblock %}
     </main>
+
+    <footer class="text-gray-600 body-font">
+        <div class="container px-5 py-8 mx-auto flex items-center justify-between">
+            <div class="text-sm text-gray-500">Desarrollado por:
+                <span class="text-gray-900">Rene Riquelme</span>
+            </div>
+            <div class="text-sm text-gray-500">Correo:
+                <a href="mailto:correo@institucional.com" class="text-gray-900">RENE.RIQUELME@alumno.santiagocft.cl</a>
+            </div>
+            <div class="text-sm text-gray-500">Fecha de entrega:
+                <span class="text-gray-900">29 de junio de 2024</span>
+            </div>
+        </div>
+    </footer>
     
     <script src="{% static 'front/js/toogle.js' %}"></script>
+    {% block extrajs %}
+    {% endblock %}
 </body>
 </html>

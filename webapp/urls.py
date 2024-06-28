@@ -1,3 +1,4 @@
+# webapp/urls.py
 from django.urls import path
 from . import views
 
@@ -9,7 +10,7 @@ urlpatterns = [
     path('editar_categoria/<int:id_categoria>/', views.editar_categoria, name='editar_categoria'),
     path('eliminar_producto/<int:id_producto>/', views.eliminar_producto, name='eliminar_producto'),
     path('editar_producto/<int:id_producto>/', views.editar_producto, name='editar_producto'),
-    path('registrar/', views.registrar, name='registrar'),
-    path('iniciar/', views.iniciar, name='iniciar'),
+    path('registrar/', views.registrar_usuario, name='registrar'),
+    path('iniciar/', views.iniciar_sesion, name='iniciar_sesion'),
+    path('cerrar/', views.cerrar_sesion, name='cerrar_sesion'),  # Añade una URL para cerrar sesión si no existe
 ]
-

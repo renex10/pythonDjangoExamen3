@@ -13,6 +13,6 @@ class CategoriaForm(forms.ModelForm):
     def clean_descripcion(self):
         descripcion = self.cleaned_data.get('descripcion')
         if len(descripcion) > 20:
-            raise forms.ValidationError("Ensure this value has at most 20 characters.")
+            raise forms.ValidationError("Asegúrese de que este valor tenga como máximo 20 caracteres.")
         return descripcion
 

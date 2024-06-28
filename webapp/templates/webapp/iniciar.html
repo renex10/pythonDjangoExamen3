@@ -1,14 +1,27 @@
 {% extends 'webapp/base.html' %}
-{% load static %} <!-- Cargar etiquetas estáticas -->
 
-{% block title %}
-    Mi Página - {% block page_title %}iniciar{% endblock %}
-{% endblock %}
+{% block title %}Iniciar sesión{% endblock %}
 
 {% block content %}
-
-
-<section class="text-gray-600 body-font">
-<h2>iniciar</h2>
-</section>
+<div class="flex justify-center items-center min-h-screen bg-gray-100">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+        <h2 class="text-2xl font-bold mb-6 text-center">Iniciar sesión</h2>
+        
+        <form method="post" class="space-y-4" action="{% url 'iniciar_sesion' %}">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            <div>
+                {{ form.username.errors }}
+                {{ form.username.label }}
+                {{ form.username }}
+            </div>
+            <div>
+                {{ form.password.errors }}
+                {{ form.password.label }}
+                {{ form.password }}
+            </div>
+            <button type="submit" class="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Iniciar sesión</button>
+        </form>
+    </div>
+</div>
 {% endblock %}
